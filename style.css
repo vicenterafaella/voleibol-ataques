@@ -757,3 +757,77 @@ footer {
         gap: 20px;
     }
 }
+/* =========================
+   NOMES DAS EQUIPES
+========================= */
+
+
+.team-name {
+
+    width: 180px;
+
+    padding: 8px;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #ffc928;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+}
+
+
+/* =========================
+   CRONÔMETRO
+========================= */
+
+
+.timer {
+
+    margin: 20px 0;
+
+}
+
+
+.timer h3 {
+
+    font-size: 35px;
+
+    color: white;
+
+    margin-bottom: 15px;
+
+}
+
+
+.timer button {
+
+    margin: 5px;
+
+    font-size: 12px;
+
+}
+
+
+/* Ajuste para telas menores */
+
+@media(max-width:600px){
+
+    .team-name{
+
+        width:140px;
+
+        font-size:16px;
+
+    }
+
+
+}
