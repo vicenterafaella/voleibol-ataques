@@ -1,117 +1,190 @@
-// ==========================
+// =======================
 // PLACAR
-// ==========================
+// =======================
+
 
 let scoreA = 0;
 let scoreB = 0;
 
 
-// Elementos do HTML
-const scoreElementA = document.getElementById("scoreA");
-const scoreElementB = document.getElementById("scoreB");
+const scoreElementA =
+document.getElementById("scoreA");
 
 
-// ==========================
-// ADICIONAR PONTO
-// ==========================
+const scoreElementB =
+document.getElementById("scoreB");
 
-function addPoint(team) {
 
-    if (team === "A") {
+
+function addPoint(team){
+
+
+    if(team === "A"){
+
         scoreA++;
+
     }
 
-    if (team === "B") {
+
+    if(team === "B"){
+
         scoreB++;
+
     }
+
 
     updateScore();
 
-    checkWinner();
+
 }
 
 
-// ==========================
-// REMOVER PONTO
-// ==========================
 
-function removePoint(team) {
 
-    if (team === "A" && scoreA > 0) {
+function removePoint(team){
+
+
+    if(team === "A" && scoreA > 0){
+
         scoreA--;
+
     }
 
-    if (team === "B" && scoreB > 0) {
+
+
+    if(team === "B" && scoreB > 0){
+
         scoreB--;
+
     }
+
+
 
     updateScore();
-}
 
-
-// ==========================
-// ATUALIZAR PLACAR
-// ==========================
-
-function updateScore() {
-
-    scoreElementA.textContent = scoreA;
-    scoreElementB.textContent = scoreB;
 
 }
 
 
-// ==========================
-// REINICIAR
-// ==========================
 
-function resetScore() {
+
+function updateScore(){
+
+
+    scoreElementA.innerHTML = scoreA;
+
+
+    scoreElementB.innerHTML = scoreB;
+
+
+}
+
+
+
+
+function resetScore(){
+
 
     scoreA = 0;
+
     scoreB = 0;
 
+
     updateScore();
+
 
 }
 
 
-// ==========================
-// VERIFICAR VENCEDOR
-// ==========================
 
-function checkWinner() {
-
-    // Brasil venceu
-    if (
-        scoreA >= 25 &&
-        scoreA - scoreB >= 2
-    ) {
-
-        setTimeout(() => {
-
-            alert("🏆 BRASIL VENCEU O SET!");
-
-            resetScore();
-
-        }, 100);
-
-    }
+// =======================
+// CRONÔMETRO
+// =======================
 
 
-    // Adversário venceu
-    if (
-        scoreB >= 25 &&
-        scoreB - scoreA >= 2
-    ) {
+let seconds = 0;
 
-        setTimeout(() => {
+let timer;
 
-            alert("🏆 ADVERSÁRIO VENCEU O SET!");
 
-            resetScore();
 
-        }, 100);
+function startTimer(){
 
-    }
+
+    if(timer) return;
+
+
+
+    timer = setInterval(function(){
+
+
+        seconds++;
+
+
+        updateTimer();
+
+
+    },1000);
+
+
+}
+
+
+
+
+function pauseTimer(){
+
+
+    clearInterval(timer);
+
+
+    timer = null;
+
+
+}
+
+
+
+
+function resetTimer(){
+
+
+    clearInterval(timer);
+
+
+    timer = null;
+
+
+    seconds = 0;
+
+
+    updateTimer();
+
+
+}
+
+
+
+
+function updateTimer(){
+
+
+    let min =
+    Math.floor(seconds / 60);
+
+
+    let sec =
+    seconds % 60;
+
+
+
+    document.getElementById("timer")
+    .innerHTML =
+
+    String(min).padStart(2,"0")
+    + ":" +
+
+    String(sec).padStart(2,"0");
+
 
 }
