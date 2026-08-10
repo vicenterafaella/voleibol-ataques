@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vôlei Arena</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <h1>🏐 VÔLEI ARENA</h1>
+
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#fundamentos">Fundamentos</a></li>
+                <li><a href="#posicoes">Posições</a></li>
+                <li><a href="#placar">Placar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section id="inicio" class="hero">
+            <div class="hero-content">
+                <span class="tag">ESPORTE • ENERGIA • EQUIPE</span>
+
+                <h2>Viva a paixão pelo <span>voleibol!</span></h2>
+
+                <p>
+                    Conheça os fundamentos, as posições e a dinâmica
+                    de um dos esportes mais emocionantes do mundo.
+                </p>
+
+                <a href="#fundamentos" class="btn">Explorar</a>
+            </div>
+
+            <div class="ball">🏐</div>
+        </section>
+
+        <!-- FUNDAMENTOS -->
+        <section id="fundamentos" class="section">
+            <div class="section-title">
+                <span>APRENDA</span>
+                <h2>Fundamentos do Vôlei</h2>
+            </div>
+
+            <div class="cards">
+
+                <article class="card">
+                    <div class="icon">🤲</div>
+                    <h3>Manchete</h3>
+                    <p>
+                        Utilizada principalmente para receber saques
+                        e ataques. O contato acontece com os antebraços.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🙌</div>
+                    <h3>Toque</h3>
+                    <p>
+                        Movimento realizado com as pontas dos dedos,
+                        muito utilizado para preparar o ataque.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🔥</div>
+                    <h3>Ataque</h3>
+                    <p>
+                        Golpe ofensivo que busca enviar a bola ao
+                        campo adversário com velocidade e precisão.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon">🧱</div>
+                    <h3>Bloqueio</h3>
+                    <p>
+                        Ação defensiva realizada próxima à rede para
+                        impedir ou dificultar o ataque adversário.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- POSIÇÕES -->
+        <section id="posicoes" class="positions">
+            <div class="section-title">
+                <span>TIME</span>
+                <h2>Posições em Quadra</h2>
+            </div>
+
+            <div class="court-container">
+
+                <div class="court">
+
+                    <div class="position pos1">
+                        <strong>1</strong>
+                        <small>Defesa</small>
+                    </div>
+
+                    <div class="position pos2">
+                        <strong>2</strong>
+                        <small>Ataque</small>
+                    </div>
+
+                    <div class="position pos3">
+                        <strong>3</strong>
+                        <small>Central</small>
+                    </div>
+
+                    <div class="position pos4">
+                        <strong>4</strong>
+                        <small>Ponta</small>
+                    </div>
+
+                    <div class="position pos5">
+                        <strong>5</strong>
+                        <small>Defesa</small>
+                    </div>
+
+                    <div class="position pos6">
+                        <strong>6</strong>
+                        <small>Defesa</small>
+                    </div>
+
+                    <div class="net"></div>
+
+                </div>
+
+                <div class="position-info">
+                    <h3>🏐 A equipe</h3>
+                    <p>
+                        Cada jogador possui uma função importante.
+                        A organização e a comunicação são essenciais
+                        para que a equipe consiga marcar pontos.
+                    </p>
+
+                    <div class="mini-info">
+                        <div>
+                            <strong>6</strong>
+                            <span>Jogadores</span>
+                        </div>
+
+                        <div>
+                            <strong>1</strong>
+                            <span>Libero</span>
+                        </div>
+
+                        <div>
+                            <strong>25</strong>
+                            <span>Pontos</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PLACAR -->
+        <section id="placar" class="section score-section">
+
+            <div class="section-title">
+                <span>INTERATIVO</span>
+                <h2>Placar de Vôlei</h2>
+            </div>
+
+            <div class="scoreboard">
+
+                <div class="team">
+                    <h3>BRASIL</h3>
+                    <div id="scoreA">0</div>
+
+                    <button onclick="addPoint('A')">
+                        + Ponto
+                    </button>
+
+                    <button class="minus" onclick="removePoint('A')">
+                        - Ponto
+                    </button>
+                </div>
+
+                <div class="versus">
+                    <span>VS</span>
+                    <button class="reset" onclick="resetScore()">
+                        Reiniciar
+                    </button>
+                </div>
+
+                <div class="team">
+                    <h3>ADVERSÁRIO</h3>
+                    <div id="scoreB">0</div>
+
+                    <button onclick="addPoint('B')">
+                        + Ponto
+                    </button>
+
+                    <button class="minus" onclick="removePoint('B')">
+                        - Ponto
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FRASE -->
+        <section class="quote">
+            <div>
+                <span>ESPÍRITO DE EQUIPE</span>
+                <h2>
+                    "No vôlei, ninguém vence sozinho."
+                </h2>
+                <p>
+                    Treine, confie na sua equipe e nunca desista
+                    de uma bola.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>🏐 Vôlei Arena — Feito para quem ama voleibol.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
