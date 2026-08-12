@@ -1,190 +1,69 @@
-// =======================
-// PLACAR
-// =======================
+// Variáveis do Placar
+let pontosBrasil = 0;
+let pontosAdversario = 0;
 
+// Variáveis do Cronômetro
+let tempoSegundos = 0;
+let intervaloCronometro = null;
 
-let scoreA = 0;
-let scoreB = 0;
-
-
-const scoreElementA =
-document.getElementById("scoreA");
-
-
-const scoreElementB =
-document.getElementById("scoreB");
-
-
-
-function addPoint(team){
-
-
-    if(team === "A"){
-
-        scoreA++;
-
+// Função para alterar a pontuação
+function mudarPonto(time, valor) {
+    if (time === 'brasil') {
+        pontosBrasil = Math.max(0, pontosBrasil + valor); // Impede pontos negativos
+        document.getElementById('score-brasil').innerText = pontosBrasil;
+    } else if (time === 'adversario') {
+        pontosAdversario = Math.max(0, pontosAdversario + valor); // Impede pontos negativos
+        document.getElementById('score-adversario').innerText = pontosAdversario;
     }
-
-
-    if(team === "B"){
-
-        scoreB++;
-
-    }
-
-
-    updateScore();
-
-
 }
 
-
-
-
-function removePoint(team){
-
-
-    if(team === "A" && scoreA > 0){
-
-        scoreA--;
-
-    }
-
-
-
-    if(team === "B" && scoreB > 0){
-
-        scoreB--;
-
-    }
-
-
-
-    updateScore();
-
-
+// Função para formatar o tempo (00:00)
+function formatarTempo(segundos) {
+    const minutos = Math.floor(segundos / 60);
+    const restanteSegundos = segundos % 60;
+    
+    const minsFormatados = minutos < 10 ? '0' + minutos : minutos;
+    const segsFormatados = restanteSegundos < 10 ? '0' + restanteSegundos : restanteSegundos;
+    
+    return `${minsFormatados}:${segsFormatados}`;
 }
 
+// Controladores do Cronômetro
+function iniciarCronometro() {
+    if (intervaloCronometro !== null) return; // Evita duplicar múltiplos intervalos
 
+    document.getElementById('btn-iniciar').disabled = true;
+    document.getElementById('btn-pausar').disabled = false;
 
-
-function updateScore(){
-
-
-    scoreElementA.innerHTML = scoreA;
-
-
-    scoreElementB.innerHTML = scoreB;
-
-
+    intervaloCronometro = setInterval(() => {
+        tempoSegundos++;
+        document.getElementById('timer').innerText = formatarTempo(tempoSegundos);
+    }, 1000);
 }
 
-
-
-
-function resetScore(){
-
-
-    scoreA = 0;
-
-    scoreB = 0;
-
-
-    updateScore();
-
-
+function pausarCronometro() {
+    clearInterval(intervaloCronometro);
+    intervaloCronometro = null;
+    
+    document.getElementById('btn-iniciar').disabled = false;
+    document.getElementById('btn-pausar').disabled = true;
 }
 
-
-
-// =======================
-// CRONÔMETRO
-// =======================
-
-
-let seconds = 0;
-
-let timer;
-
-
-
-function startTimer(){
-
-
-    if(timer) return;
-
-
-
-    timer = setInterval(function(){
-
-
-        seconds++;
-
-
-        updateTimer();
-
-
-    },1000);
-
-
+function zerarCronometro() {
+    pausarCronometro();
+    tempoSegundos = 0;
+    document.getElementById('timer').innerText = "00:00";
+    
+    document.getElementById('btn-iniciar').disabled = false;
+    document.getElementById('btn-pausar').disabled = true;
 }
 
-
-
-
-function pauseTimer(){
-
-
-    clearInterval(timer);
-
-
-    timer = null;
-
-
+// Função para reiniciar tudo do zero
+function reiniciarPlacar() {
+    zerarCronometro();
+    pontosBrasil = 0;
+    pontosAdversario = 0;
+    document.getElementById('score-brasil').innerText = 0;
+    document.getElementById('score-adversario').innerText = 0;
 }
 
-
-
-
-function resetTimer(){
-
-
-    clearInterval(timer);
-
-
-    timer = null;
-
-
-    seconds = 0;
-
-
-    updateTimer();
-
-
-}
-
-
-
-
-function updateTimer(){
-
-
-    let min =
-    Math.floor(seconds / 60);
-
-
-    let sec =
-    seconds % 60;
-
-
-
-    document.getElementById("timer")
-    .innerHTML =
-
-    String(min).padStart(2,"0")
-    + ":" +
-
-    String(sec).padStart(2,"0");
-
-
-}
