@@ -1,69 +1,97 @@
-// Variáveis do Placar
-let pontosBrasil = 0;
-let pontosAdversario = 0;
+// Lógica do Mascote
+const frases = [
+    "Vôlei é vida! Vamos treinar?",
+    "O saque da Rafaela é imbatível!",
+    "Você sabia que o vôlei foi criado em 1895?",
+    "Não morda a bola, brinque com ela!",
+    "Bloqueio perfeito! Boa jogada!"
+];
 
-// Variáveis do Cronômetro
-let tempoSegundos = 0;
-let intervaloCronometro = null;
+function falarMascote() {
+    const balao = document.getElementById('balao-fala');
+    const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+    
+    balao.innerText = fraseAleatoria;
+    balao.classList.remove('escondido');
+    
+    setTimeout(() => {
+        balao.classList.add('escondido');
+    }, 3000);
+}
 
-// Função para alterar a pontuação
-function mudarPonto(time, valor) {
-    if (time === 'brasil') {
-        pontosBrasil = Math.max(0, pontosBrasil + valor); // Impede pontos negativos
-        document.getElementById('score-brasil').innerText = pontosBrasil;
-    } else if (time === 'adversario') {
-        pontosAdversario = Math.max(0, pontosAdversario + valor); // Impede pontos negativos
-        document.getElementById('score-adversario').innerText = pontosAdversario;
+// Lógica do Jogo de Vôlei
+let jogadorPos = 160;
+let bolaX = 190;
+let bolaY = 0;
+let velocidadeX = 2;
+let velocidadeY = 3;
+let pontos = 0;
+let jogoAtivo = false;
+let intervaloJogo;
+
+// Controle do jogador por teclado
+document.addEventListener('keydown', (e) => {
+    const jogador = document.getElementById('jogador');
+    if (e.key === 'ArrowLeft' && jogadorPos > 0) {
+        jogadorPos -= 20;
+    } else if (e.key === 'ArrowRight' && jogadorPos < 320) {
+        jogadorPos += 20;
     }
-}
+    jogador.style.left = jogadorPos + 'px';
+});
 
-// Função para formatar o tempo (00:00)
-function formatarTempo(segundos) {
-    const minutos = Math.floor(segundos / 60);
-    const restanteSegundos = segundos % 60;
+function iniciarJogo() {
+    if (jogoAtivo) return;
     
-    const minsFormatados = minutos < 10 ? '0' + minutos : minutos;
-    const segsFormatados = restanteSegundos < 10 ? '0' + restanteSegundos : restanteSegundos;
+    // Resetar variáveis
+    pontos = 0;
+    bolaX = 190;
+    bolaY = 0;
+    velocidadeY = 3;
+    velocidadeX = (Math.random() > 0.5 ? 2 : -2);
+    jogoAtivo = true;
+    document.getElementById('placar').innerText = "Pontos: " + pontos;
     
-    return `${minsFormatados}:${segsFormatados}`;
+    clearInterval(intervaloJogo);
+    intervaloJogo = setInterval(atualizarJogo, 20);
 }
 
-// Controladores do Cronômetro
-function iniciarCronometro() {
-    if (intervaloCronometro !== null) return; // Evita duplicar múltiplos intervalos
-
-    document.getElementById('btn-iniciar').disabled = true;
-    document.getElementById('btn-pausar').disabled = false;
-
-    intervaloCronometro = setInterval(() => {
-        tempoSegundos++;
-        document.getElementById('timer').innerText = formatarTempo(tempoSegundos);
-    }, 1000);
-}
-
-function pausarCronometro() {
-    clearInterval(intervaloCronometro);
-    intervaloCronometro = null;
+function atualizarJogo() {
+    const bola = document.getElementById('bola');
     
-    document.getElementById('btn-iniciar').disabled = false;
-    document.getElementById('btn-pausar').disabled = true;
-}
-
-function zerarCronometro() {
-    pausarCronometro();
-    tempoSegundos = 0;
-    document.getElementById('timer').innerText = "00:00";
+    // Movimentação da bola
+    bolaX += velocidadeX;
+    bolaY += velocidadeY;
     
-    document.getElementById('btn-iniciar').disabled = false;
-    document.getElementById('btn-pausar').disabled = true;
+    // Colisão com as paredes laterais
+    if (bolaX <= 0 || bolaX >= 380) {
+        velocidadeX = -velocidadeX;
+    }
+    
+    // Colisão com o teto
+    if (bolaY <= 0) {
+        velocidadeY = -velocidadeY;
+    }
+    
+    // Colisão com a raquete da Rafaela (jogador)
+    if (bolaY >= 260 && bolaY <= 270) {
+        if (bolaX + 20 >= jogadorPos && bolaX <= jogadorPos + 80) {
+            velocidadeY = -velocidadeY;
+            // Aumenta velocidade gradualmente para dar desafio
+            velocidadeY -= 0.5; 
+            pontos++;
+            document.getElementById('placar').innerText = "Pontos: " + pontos;
+        }
+    }
+    
+    // Fim de jogo se a bola cair
+    if (bolaY > 300) {
+        clearInterval(intervaloJogo);
+        jogoAtivo = false;
+        alert("Fim de jogo! A bola caiu. Você fez " + pontos + " pontos!");
+    }
+    
+    // Atualiza posições visuais
+    bola.style.left = bolaX + 'px';
+    bola.style.top = bolaY + 'px';
 }
-
-// Função para reiniciar tudo do zero
-function reiniciarPlacar() {
-    zerarCronometro();
-    pontosBrasil = 0;
-    pontosAdversario = 0;
-    document.getElementById('score-brasil').innerText = 0;
-    document.getElementById('score-adversario').innerText = 0;
-}
-
