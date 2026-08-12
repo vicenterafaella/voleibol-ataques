@@ -26,6 +26,8 @@ function animarMascote() {
     const mascoteEmoji = document.getElementById('mascote');
     const larguraTela = window.innerWidth;
 
+    if (!container || !mascoteEmoji) return;
+
     mascoteX += velocidadeMascote * direcaoMascote;
 
     // Inverte a direção ao bater nas bordas da janela
@@ -48,7 +50,7 @@ animarMascote();
 const frases = [
     "Vôlei é vida! Vamos treinar?",
     "O saque da Rafaela é imbatível!",
-    "Você sabia que o vôlei foi criado em 1895?",
+    "Você sabia que o vôlei foi criado in 1895?",
     "Adorei essa cor de quadra!",
     "Bloqueio perfeito! Boa jogada!"
 ];
@@ -77,6 +79,8 @@ let intervaloJogo;
 
 document.addEventListener('keydown', (e) => {
     const jogador = document.getElementById('jogador');
+    if (!jogador) return;
+    
     if (e.key === 'ArrowLeft' && jogadorPos > 0) {
         jogadorPos -= 20;
     } else if (e.key === 'ArrowRight' && jogadorPos < 320) {
@@ -102,27 +106,33 @@ function iniciarJogo() {
 
 function atualizarJogo() {
     const bola = document.getElementById('bola');
+    if (!bola) return;
     
     bolaX += velocidadeX;
-    bolaY += velocidadY;
+    bolaY += velocidadeY;
     
+    // Colisão paredes laterais
     if (bolaX <= 0 || bolaX >= 380) {
         velocidadeX = -velocidadeX;
     }
     
+    // Colisão teto
     if (bolaY <= 0) {
         velocidadeY = -velocidadeY;
     }
     
+    // Colisão com o jogador (Rafaela)
     if (bolaY >= 260 && bolaY <= 270) {
         if (bolaX + 20 >= jogadorPos && bolaX <= jogadorPos + 80) {
             velocidadeY = -velocidadeY;
+            // CORREÇÃO AQUI: Ajustado o nome correto da variável
             velocidadeY -= 0.4; 
             pontos++;
             document.getElementById('placar').innerText = "Pontos: " + pontos;
         }
     }
     
+    // Fim de jogo se a bola cair
     if (bolaY > 300) {
         clearInterval(intervaloJogo);
         jogoAtivo = false;
