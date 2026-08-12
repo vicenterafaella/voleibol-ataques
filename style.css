@@ -5,6 +5,7 @@ body {
     background-color: #f0f8ff;
     color: #333;
     text-align: center;
+    overflow-x: hidden; /* Evita barra de rolagem por causa do mascote */
 }
 
 header {
@@ -17,6 +18,7 @@ main {
     max-width: 800px;
     margin: 20px auto;
     padding: 0 20px;
+    padding-bottom: 100px; /* Espaço para o mascote não cobrir o conteúdo */
 }
 
 section {
@@ -27,43 +29,44 @@ section {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-ul {
-    text-align: left;
-    display: inline-block;
+/* Regras Interativas */
+.Abas-regras {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
-/* Estilos do Mascote */
-#mascote-container {
-    position: relative;
-    display: inline-block;
-    margin-top: 20px;
-}
-
-#mascote {
-    font-size: 80px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-#mascote:hover {
-    transform: scale(1.1);
-}
-
-#balao-fala {
-    position: absolute;
-    top: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #ffe600;
+.btn-regra {
+    background-color: #e0f0ff;
+    color: #0056b3;
+    border: 2px solid #0056b3;
     padding: 8px 15px;
-    border-radius: 15px;
+    cursor: pointer;
+    border-radius: 20px;
     font-weight: bold;
-    border: 2px solid #333;
-    white-space: nowrap;
+    transition: 0.2s;
 }
 
-.escondido {
-    display: none;
+.btn-regra:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.painel-regra {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-left: 5px solid #0056b3;
+    border-radius: 4px;
+    text-align: left;
+    min-height: 50px;
+}
+
+/* Seletor de Cores */
+.seletor-cor {
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 /* Estilos do Jogo */
@@ -71,7 +74,7 @@ ul {
     width: 100%;
     max-width: 400px;
     height: 300px;
-    background-color: #ff9f43;
+    background-color: #ff9f43; /* Cor padrão inicial */
     margin: 20px auto;
     position: relative;
     border: 4px solid #fff;
@@ -115,7 +118,7 @@ ul {
     border-radius: 3px;
 }
 
-button {
+.btn-principal {
     background-color: #0056b3;
     color: white;
     border: none;
@@ -125,6 +128,46 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.btn-principal:hover {
     background-color: #003d82;
+}
+
+/* Mascote Andante Fixo na Base da Tela */
+#mascote-andante {
+    position: fixed;
+    bottom: 10px;
+    left: 0px;
+    z-index: 1000;
+}
+
+#mascote {
+    font-size: 60px;
+    cursor: pointer;
+    user-select: none;
+}
+
+#balao-fala {
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffe600;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    border: 2px solid #333;
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.escondido {
+    display: none;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: relative;
+    z-index: 10;
 }
