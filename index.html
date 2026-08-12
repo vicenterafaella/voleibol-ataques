@@ -1,149 +1,53 @@
-<section id="placar" class="section scoreboard-section">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placar de Vôlei Interativo</title>
+    <!-- Linha abaixo corrige o erro 404 do favicon prevenindo o aviso no console -->
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <div class="section-title">
+    <div class="container">
+        <h1>Placar de Vôlei</h1>
 
-        <span>INTERATIVO</span>
+        <div class="scoreboard">
+            <!-- Time Brasil -->
+            <div class="team-box">
+                <h2 class="team-name">BRASIL</h2>
+                <div id="score-brasil" class="score">0</div>
+                <button onclick="mudarPonto('brasil', 1)" class="btn btn-point">+ Ponto</button>
+                <button onclick="mudarPonto('brasil', -1)" class="btn btn-sub">- Ponto</button>
+            </div>
 
-        <h2>
-            Placar de Vôlei
-        </h2>
+            <div class="vs">VS</div>
 
+            <!-- Time Adversário -->
+            <div class="team-box">
+                <h2 class="team-name">ADVERSÁRIO</h2>
+                <div id="score-adversario" class="score">0</div>
+                <button onclick="mudarPonto('adversario', 1)" class="btn btn-point">+ Ponto</button>
+                <button onclick="mudarPonto('adversario', -1)" class="btn btn-sub">- Ponto</button>
+            </div>
+        </div>
+
+        <!-- Cronômetro -->
+        <div class="timer-section">
+            <div id="timer" class="timer">00:00</div>
+            <div class="controls-row">
+                <button id="btn-iniciar" onclick="iniciarCronometro()" class="btn btn-start">▶ Iniciar</button>
+                <button id="btn-pausar" onclick="pausarCronometro()" class="btn btn-pause" disabled>⏸ Pausar</button>
+                <button onclick="zerarCronometro()" class="btn btn-reset">🔄 Zerar</button>
+            </div>
+        </div>
+
+        <!-- Reiniciar Tudo -->
+        <button onclick="reiniciarPlacar()" class="btn btn-danger">Reiniciar Placar Global</button>
     </div>
 
+    <script src="script.js"></script>
+</body>
+</html>
 
-    <div class="scoreboard">
-
-
-        <!-- EQUIPE 1 -->
-
-        <div class="team">
-
-            <input 
-                type="text" 
-                id="teamAName" 
-                value="BRASIL"
-                class="team-name"
-            >
-
-            <div id="scoreA" class="score">
-                0
-            </div>
-
-
-            <div class="score-buttons">
-
-                <button 
-                    class="btn-score"
-                    onclick="addPoint('A')">
-                    + Ponto
-                </button>
-
-
-                <button 
-                    class="btn-score btn-minus"
-                    onclick="removePoint('A')">
-                    - Ponto
-                </button>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- CENTRO -->
-
-        <div class="score-center">
-
-            <span>
-                VS
-            </span>
-
-
-            <!-- CRONÔMETRO -->
-
-            <div class="timer">
-
-                <h3 id="timer">
-                    00:00
-                </h3>
-
-
-                <button 
-                    class="reset"
-                    onclick="startTimer()">
-                    ▶ Iniciar
-                </button>
-
-
-                <button 
-                    class="reset"
-                    onclick="pauseTimer()">
-                    ⏸ Pausar
-                </button>
-
-
-                <button 
-                    class="reset"
-                    onclick="resetTimer()">
-                    🔄 Zerar
-                </button>
-
-            </div>
-
-
-            <button 
-                class="reset"
-                onclick="resetScore()">
-                Reiniciar Placar
-            </button>
-
-
-        </div>
-
-
-
-
-        <!-- EQUIPE 2 -->
-
-        <div class="team">
-
-
-            <input 
-                type="text" 
-                id="teamBName" 
-                value="ADVERSÁRIO"
-                class="team-name"
-            >
-
-
-            <div id="scoreB" class="score">
-                0
-            </div>
-
-
-            <div class="score-buttons">
-
-                <button 
-                    class="btn-score"
-                    onclick="addPoint('B')">
-                    + Ponto
-                </button>
-
-
-                <button 
-                    class="btn-score btn-minus"
-                    onclick="removePoint('B')">
-                    - Ponto
-                </button>
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-</section>
