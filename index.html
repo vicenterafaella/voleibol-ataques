@@ -14,41 +14,46 @@
     </header>
 
     <main>
-        <!-- Seção Informativa -->
+        <!-- Regras Interativas -->
         <section class="info-section">
-            <h2>Sobre o Voleibol</h2>
-            <p>O voleibol é um esporte dinâmico jogado por duas equipes em uma quadra dividida por uma rede. O objetivo principal é fazer a bola tocar o chão do lado adversário.</p>
-            <h3>Fundamentos Básicos:</h3>
-            <ul>
-                <li><strong>Saque:</strong> O início da jogada por trás da linha de fundo.</li>
-                <li><strong>Manchete:</strong> Defesa ou recepção feita com os antebraços.</li>
-                <li><strong>Toque:</strong> Levantamento preciso usando as pontas dos dedos.</li>
-                <li><strong>Ataque/Cortada:</strong> Golpe rápido para mandar a bola ao chão do rival.</li>
-            </ul>
-        </section>
-
-        <!-- Mascote Interativo -->
-        <section class="mascote-section">
-            <h2>Nosso Mascote</h2>
-            <div id="mascote-container">
-                <div id="balao-fala" class="escondido">Olá! Bem-vindo ao clube!</div>
-                <div id="mascote" onclick="falarMascote()">🦊</div>
+            <h2>Regras Oficiais do Vôlei</h2>
+            <p>Clique nos botões abaixo para aprender as regras essenciais:</p>
+            <div class="Abas-regras">
+                <button class="btn-regra" onclick="mostrarRegra('jogadores')">👥 Jogadores</button>
+                <button class="btn-regra" onclick="mostrarRegra('toques')">🏐 Toques na Bola</button>
+                <button class="btn-regra" onclick="mostrarRegra('pontos')">🏆 Como Pontuar</button>
+                <button class="btn-regra" onclick="mostrarRegra('rotacao')">🔄 Rotação/Rodízio</button>
             </div>
-            <p class="legenda">Clique no mascote para interagir!</p>
+            <div id="painel-regra" class="painel-regra">
+                Selecione uma regra acima para ler os detalhes!
+            </div>
         </section>
 
         <!-- Mini-Jogo de Vôlei -->
         <section class="jogo-section">
             <h2>Mini-Jogo: Rebata com a Rafaela</h2>
-            <p>Use as **setas Direita e Esquerda** do teclado para mover a Rafaela e não deixe a bola cair!</p>
+            <p>Use as **setas Direita e Esquerda** do seu teclado para mover a Rafaela.</p>
+            
+            <!-- Seletor de Cores da Quadra -->
+            <div class="seletor-cor">
+                <label for="corQuadra">Escolha a cor da quadra: </label>
+                <input type="color" id="corQuadra" value="#ff9f43" onchange="mudarCorQuadra(this.value)">
+            </div>
+
             <div id="quadra">
                 <div id="jogador">Rafaela</div>
                 <div id="bola"></div>
                 <div id="placar">Pontos: 0</div>
             </div>
-            <button onclick="iniciarJogo()">Iniciar Jogo</button>
+            <button class="btn-principal" onclick="iniciarJogo()">Iniciar Jogo</button>
         </section>
     </main>
+
+    <!-- Mascote que Anda pela Tela -->
+    <div id="mascote-andante">
+        <div id="balao-fala" class="escondido">Olá! Bem-vindo!</div>
+        <div id="mascote" onclick="falarMascote()">🦊</div>
+    </div>
 
     <footer>
         <p>&copy; 2026 Clube de Vôlei da Rafaela. Desenvolvido para o GitHub.</p>
