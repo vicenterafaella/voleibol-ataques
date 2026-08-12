@@ -3,51 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placar de Vôlei Interativo</title>
-    <!-- Linha abaixo corrige o erro 404 do favicon prevenindo o aviso no console -->
-    <link rel="icon" href="data:,">
+    <title>Clube de Vôlei da Rafaela</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Placar de Vôlei</h1>
+    <header>
+        <h1>Clube de Vôlei da Rafaela</h1>
+        <p>O seu portal interativo sobre o mundo do voleibol!</p>
+    </header>
 
-        <div class="scoreboard">
-            <!-- Time Brasil -->
-            <div class="team-box">
-                <h2 class="team-name">BRASIL</h2>
-                <div id="score-brasil" class="score">0</div>
-                <button onclick="mudarPonto('brasil', 1)" class="btn btn-point">+ Ponto</button>
-                <button onclick="mudarPonto('brasil', -1)" class="btn btn-sub">- Ponto</button>
+    <main>
+        <!-- Seção Informativa -->
+        <section class="info-section">
+            <h2>Sobre o Voleibol</h2>
+            <p>O voleibol é um esporte dinâmico jogado por duas equipes em uma quadra dividida por uma rede. O objetivo principal é fazer a bola tocar o chão do lado adversário.</p>
+            <h3>Fundamentos Básicos:</h3>
+            <ul>
+                <li><strong>Saque:</strong> O início da jogada por trás da linha de fundo.</li>
+                <li><strong>Manchete:</strong> Defesa ou recepção feita com os antebraços.</li>
+                <li><strong>Toque:</strong> Levantamento preciso usando as pontas dos dedos.</li>
+                <li><strong>Ataque/Cortada:</strong> Golpe rápido para mandar a bola ao chão do rival.</li>
+            </ul>
+        </section>
+
+        <!-- Mascote Interativo -->
+        <section class="mascote-section">
+            <h2>Nosso Mascote</h2>
+            <div id="mascote-container">
+                <div id="balao-fala" class="escondido">Olá! Bem-vindo ao clube!</div>
+                <div id="mascote" onclick="falarMascote()">🦊</div>
             </div>
+            <p class="legenda">Clique no mascote para interagir!</p>
+        </section>
 
-            <div class="vs">VS</div>
-
-            <!-- Time Adversário -->
-            <div class="team-box">
-                <h2 class="team-name">ADVERSÁRIO</h2>
-                <div id="score-adversario" class="score">0</div>
-                <button onclick="mudarPonto('adversario', 1)" class="btn btn-point">+ Ponto</button>
-                <button onclick="mudarPonto('adversario', -1)" class="btn btn-sub">- Ponto</button>
+        <!-- Mini-Jogo de Vôlei -->
+        <section class="jogo-section">
+            <h2>Mini-Jogo: Rebata com a Rafaela</h2>
+            <p>Use as **setas Direita e Esquerda** do teclado para mover a Rafaela e não deixe a bola cair!</p>
+            <div id="quadra">
+                <div id="jogador">Rafaela</div>
+                <div id="bola"></div>
+                <div id="placar">Pontos: 0</div>
             </div>
-        </div>
+            <button onclick="iniciarJogo()">Iniciar Jogo</button>
+        </section>
+    </main>
 
-        <!-- Cronômetro -->
-        <div class="timer-section">
-            <div id="timer" class="timer">00:00</div>
-            <div class="controls-row">
-                <button id="btn-iniciar" onclick="iniciarCronometro()" class="btn btn-start">▶ Iniciar</button>
-                <button id="btn-pausar" onclick="pausarCronometro()" class="btn btn-pause" disabled>⏸ Pausar</button>
-                <button onclick="zerarCronometro()" class="btn btn-reset">🔄 Zerar</button>
-            </div>
-        </div>
-
-        <!-- Reiniciar Tudo -->
-        <button onclick="reiniciarPlacar()" class="btn btn-danger">Reiniciar Placar Global</button>
-    </div>
+    <footer>
+        <p>&copy; 2026 Clube de Vôlei da Rafaela. Desenvolvido para o GitHub.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
